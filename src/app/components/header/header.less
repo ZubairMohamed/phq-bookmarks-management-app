@@ -1,0 +1,45 @@
+header {
+  // colours
+  background: lighten(#000, 10%);
+  padding: 1rem;
+  color: #fff;
+
+  // alignment
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  //fonts
+  font-family: Garamond, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+
+  > span {
+    // hover styles for links
+
+    cursor: pointer;
+
+    &:hover {
+      color: darken(#fff, 20%);
+    }
+  }
+
+  // nav
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1rem;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      cursor: pointer;
+
+      // hover styles for links
+      &:hover {
+        color: darken(#fff, 20%);
+      }
+    }
+  }
+}
