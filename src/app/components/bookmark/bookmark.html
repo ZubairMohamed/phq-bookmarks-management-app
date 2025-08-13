@@ -1,0 +1,47 @@
+<div class="add-bookmark">
+  @if (showAdd) {
+    <input
+      (input)="validateAddBookmarkLink()"
+      placeholder="enter link here"
+      type="text"
+      [(ngModel)]="bookmark"
+      [attr.class]="isButtonDisabled ? 'is-valid' : 'is-invalid'"
+    />
+  }
+
+  @if (showEdit) {
+    <input
+      (input)="validateEditBookmarkLink()"
+      [attr.value]="savedBookmarkText"
+      [attr.readonly]="bookMarkIsEditable ? null : true"
+      [attr.class]="isEditableLinkValid ? 'is-valid' : 'is-invalid'"
+      [(ngModel)]="savedBookmarkText"
+    />
+  }
+
+  @if (showAdd) {
+    <button
+      (click)="handleAddBookmark()"
+      [attr.disabled]="isButtonDisabled ? null : true"
+    >
+      Add Bookmark
+    </button>
+  }
+
+  @if (showEdit) {
+    <button (click)="handleEdit()">Edit</button>
+  }
+
+  @if (showEdit) {
+    <button
+      (click)="handleSave()"
+      [attr.disabled]="isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true"
+    >
+      Save
+    </button>
+  }
+
+  @if (showDelete) {
+    <button (click)="handleDelete()">Delete</button>
+  }
+</div>

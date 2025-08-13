@@ -1,0 +1,42 @@
+.add-bookmark {
+  display: flex;
+
+  input {
+    width: 80%;
+    height: 2rem;
+    padding: 1rem;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+    border: 2px solid #000;
+
+    &.is-valid {
+      border: 1px solid #008000;
+    }
+
+    &.is-invalid {
+      border: 2px solid #ff0000;
+    }
+
+    &:read-only {
+      border: 0;
+      background: lighten(#000, 90%);
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button {
+    min-width: 20%;
+
+    background: #008000;
+    color: #fff;
+    border: none;
+
+    &:disabled {
+      background: lighten(#000, 80%);
+    }
+  }
+}
