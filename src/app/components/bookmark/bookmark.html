@@ -1,4 +1,4 @@
-<div class="add-bookmark">
+<div class="bookmark">
   @if (showAdd) {
     <input
       (input)="validateAddBookmarkLink()"
@@ -29,19 +29,21 @@
   }
 
   @if (showEdit) {
-    <button (click)="handleEdit()">Edit</button>
+    <button (click)="handleEdit()">
+      Edit
+    </button>
   }
 
   @if (showEdit) {
     <button
-      (click)="handleSave()"
+      (click)="handleSave(index)"
       [attr.disabled]="isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true"
     >
-      Save
+      Save Changes
     </button>
   }
 
   @if (showDelete) {
-    <button (click)="handleDelete()">Delete</button>
+    <button (click)="handleDelete(index)">Delete</button>
   }
 </div>

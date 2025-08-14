@@ -1,5 +1,9 @@
 <app-bookmark />
 
-<h2 class="body-font">Links</h2>
+<h2 class="body-font">Saved Bookmarks</h2>
 
-<app-bookmark [showAdd]="false" [showDelete]="true" [showEdit]="true"  />
+<div class="pagination-container">
+  @for (link of links; track link; let index = $index) {
+    <app-bookmark [showAdd]="false" [showDelete]="true" [showEdit]="true" [value]="link" [originalArray]="links" [index]="index"  />
+  }
+</div>

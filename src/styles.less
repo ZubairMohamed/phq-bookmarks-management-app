@@ -6,18 +6,50 @@ body {
   font-size: 1rem;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
+//fonts used as title font
 .title-font {
   font-family: Garamond, serif;
   font-weight: 600;
   letter-spacing: 0.05rem;
 }
 
+//font used for body text
 .body-font {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
 }
 
+//global padding on the main component
 main {
   padding: 1rem 1rem 1rem 1rem;
+}
+
+//colour system inspired from material ui colours
+@error: #B71C1C;
+
+@primary: #0D47A1;
+.error {
+  color: @error;
+
+  &-bg {
+    background: @error;
+  }
+
+  &-border {
+    border: 2px solid @error !important;
+  }
+}
+
+.primary {
+  color: @primary;
+
+  &-bg {
+    background: @primary;
+  }
+
+  &-border {
+    border: 2px solid @error !important;
+  }
 }

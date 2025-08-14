@@ -8,27 +8,37 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './bookmark.less',
 })
 export class Bookmark {
-  handleSave() {
-    this.bookMarkIsEditable = false;
-  }
-  handleEdit() {
-    this.bookMarkIsEditable = true;
-  }
-  handleDelete() {
-    throw new Error('Method handleDelete implemented.');
-  }
-  // properties unique to add bookmark component
-  bookmark: string = '';
-  savedBookmarkText: string = 'http://example.com';
-  isButtonDisabled: boolean = false;
-  isEditableLinkValid: boolean = true;
-  bookMarkIsEditable: boolean = false;
-
+  // bookmark props
   // this is to control whether to show the add bookmark button
   @Input() showAdd: boolean = true;
   // these are additional buttons for update and delete functionality
   @Input() showEdit: boolean = false;
   @Input() showDelete: boolean = false;
+  @Input() value!: string;
+  @Input() originalArray!: string[];
+  @Input() index!: number;
+
+  handleSave(indexOfArrayElementToUpdate: number) {
+    this.bookMarkIsEditable = false;
+  }
+  handleEdit() {
+    this.bookMarkIsEditable = true;
+  }
+  handleDelete(indexOfArrayElementToDelete: number) {
+    console.log('handle delete clicked');
+    console.log(this.originalArray);
+    // throw new Error('Method handleDelete implemented.');
+  }
+  // properties unique to add bookmark component
+  bookmark: string = '';
+  isButtonDisabled: boolean = false;
+  isEditableLinkValid: boolean = true;
+  bookMarkIsEditable: boolean = false;
+  savedBookmarkText: string = '';
+
+  ngOnInit(): void {
+    this.savedBookmarkText = this.value ? this.value : 'http://example.com';
+  }
 
   // tests to see if the text inside the input text field is valid
   isValidHttpUrl(str: string) {
@@ -51,14 +61,12 @@ export class Bookmark {
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateAddBookmarkLink() {
-
     this.isButtonDisabled =
       this.isValidHttpUrl(this.bookmark) === false ? false : true;
   }
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateEditBookmarkLink() {
-
     this.isEditableLinkValid =
       this.isValidHttpUrl(this.savedBookmarkText) === false ? false : true;
   }
