@@ -10,6 +10,7 @@
   }
 
   @if (showEdit) {
+    <div class="count">{{index < 10 ? '0' + index: index}}</div>
     <input
       (input)="validateEditBookmarkLink()"
       [attr.value]="savedBookmarkText"

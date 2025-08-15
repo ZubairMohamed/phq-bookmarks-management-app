@@ -26,7 +26,6 @@ export class Bookmark {
   }
   handleDelete(indexOfArrayElementToDelete: number) {
     console.log('handle delete clicked');
-    console.log(this.originalArray);
     // throw new Error('Method handleDelete implemented.');
   }
   // properties unique to add bookmark component
@@ -74,7 +73,9 @@ export class Bookmark {
   // this event happens when the add bookmark button is clicked on
   handleAddBookmark() {
     this.validateAddBookmarkLink();
-    console.log('handle add bookmark was clicked');
-    throw new Error('Handle Add Bookmark Not Implemented');
+    // we are adding a new bookmark to the original array of bookmarks
+    this.originalArray.push(this.bookmark);
+    //   we are also saving to local storage the end result
+    //TODO
   }
 }
