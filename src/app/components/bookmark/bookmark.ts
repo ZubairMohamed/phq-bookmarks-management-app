@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,6 +18,8 @@ export class Bookmark {
   @Input() originalArray!: string[];
   @Input() index!: number;
 
+  @Output() originalArrayChange = new EventEmitter<string[]>();
+
   handleSave(indexOfArrayElementToUpdate: number) {
     this.bookMarkIsEditable = false;
   }
@@ -30,7 +32,7 @@ export class Bookmark {
   }
   // properties unique to add bookmark component
   bookmark: string = '';
-  isButtonDisabled: boolean = false;
+  isButtonDisabled: boolean = true;
   isEditableLinkValid: boolean = true;
   bookMarkIsEditable: boolean = false;
   savedBookmarkText: string = '';
@@ -61,7 +63,7 @@ export class Bookmark {
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateAddBookmarkLink() {
     this.isButtonDisabled =
-      this.isValidHttpUrl(this.bookmark) === false ? false : true;
+      this.isValidHttpUrl(this.bookmark) === false ? true : false;
   }
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
@@ -70,11 +72,22 @@ export class Bookmark {
       this.isValidHttpUrl(this.savedBookmarkText) === false ? false : true;
   }
 
+  updateOriginalArrayFromParent(): void {
+    this.originalArrayChange.emit([...this.originalArray, this.bookmark]);
+  }
+
   // this event happens when the add bookmark button is clicked on
   handleAddBookmark() {
     this.validateAddBookmarkLink();
     // we are adding a new bookmark to the original array of bookmarks
-    this.originalArray.push(this.bookmark);
+    // this.originalArray.push(this.bookmark);
+    this.updateOriginalArrayFromParent();
+    console.log(this.originalArray);
+    
+    // Clear the input field after adding
+    this.bookmark = '';
+    this.isButtonDisabled = true;
+
     //   we are also saving to local storage the end result
     //TODO
   }

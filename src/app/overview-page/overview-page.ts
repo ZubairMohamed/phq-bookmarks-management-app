@@ -10,7 +10,7 @@ import { Bookmark } from '../components/bookmark/bookmark';
 export class OverviewPage {
   page = signal(0);
 
-  links: string[] = [
+  links = signal([
     'https://google.com',
     'https://youtube.com',
     'https://facebook.com',
@@ -112,7 +112,7 @@ export class OverviewPage {
     'https://avito.ru',
     'https://sony.com',
     'http://samsung.com',
-  ];
+  ]);
 
   splitArray(originalArray: string[], size: number) {
     let result = [];
@@ -124,7 +124,7 @@ export class OverviewPage {
   }
 
   // create an array of chunks of 20 items per array of arrays
-  chunkedArray: string[][] = this.splitArray(this.links, 20);
+  chunkedArray = computed(() => this.splitArray(this.links(), 20));
 
   handlePageChange(number: number) {
     this.page.set(number);
@@ -141,10 +141,16 @@ export class OverviewPage {
 
   handlePageIncrease() {
     const currentPage = this.page();
-    if (currentPage + 1 >= this.chunkedArray.length) {
+    if (currentPage + 1 >= this.chunkedArray().length) {
       // do nothing
     } else {
       this.page.set(currentPage + 1);
     }
+  }
+
+  updateLinks(newLinks: string[]) {
+    this.links.set(newLinks);
+    // Reset to first page when links are updated
+    this.page.set(0);
   }
 }

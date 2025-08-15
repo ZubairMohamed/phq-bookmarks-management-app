@@ -5,7 +5,7 @@
       placeholder="enter link here"
       type="text"
       [(ngModel)]="bookmark"
-      [attr.class]="isButtonDisabled ? 'is-valid' : 'is-invalid'"
+      [attr.class]="!isButtonDisabled ? 'is-valid' : 'is-invalid'"
     />
   }
 
@@ -23,7 +23,7 @@
   @if (showAdd) {
     <button
       (click)="handleAddBookmark()"
-      [attr.disabled]="isButtonDisabled ? null : true"
+      [attr.disabled]="isButtonDisabled ? true : null"
     >
       Add Bookmark
     </button>
