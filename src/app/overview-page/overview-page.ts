@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import { Bookmark } from '../components/bookmark/bookmark';
 
 @Component({
@@ -8,11 +8,14 @@ import { Bookmark } from '../components/bookmark/bookmark';
   styleUrl: './overview-page.less',
 })
 export class OverviewPage {
-  page = signal(0);
+  // page number
+  page: WritableSignal<number> = signal<number>(0);
 
-  links = signal<string[]>([]);
+  links: WritableSignal<string[]> = signal<string[]>([]);
 
-  linksPerPage: number = 20; //this variable controls how many bookmarks to display per page
+  linksPerPage: WritableSignal<number> = signal(20); //this variable controls how many bookmarks to display per page
+
+  protected readonly localStorage: Storage = localStorage;
 
   splitArray(originalArray: string[], size: number) {
     let result = [];
@@ -25,7 +28,7 @@ export class OverviewPage {
 
   // create an array of chunks of 20 items per array of arrays
   chunkedArray = computed(() =>
-    this.splitArray(this.links(), this.linksPerPage),
+    this.splitArray(this.links(), this.linksPerPage()),
   );
 
   handlePageChange(number: number) {
@@ -78,10 +81,8 @@ export class OverviewPage {
   }
 
   calculateGlobalIndex(localIndex: number) {
-    return this.page() * this.linksPerPage + localIndex;
+    return this.page() * this.linksPerPage() + localIndex;
   }
-
-  protected readonly localStorage = localStorage;
 
   fillLinksWithTestData() {
     this.updateLinks([
@@ -138,7 +139,8 @@ export class OverviewPage {
     ]);
   }
 
-  clearDatabase() {
+  // function used by flight simulator to clearn the database
+  clearDatabase(): void {
     this.updateLinks([]);
   }
 }

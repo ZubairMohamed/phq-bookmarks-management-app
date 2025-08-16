@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrl: './results.less',
 })
 export class Results {
-  queryParams = signal<string | null>(null);
+  queryParams: WritableSignal<string | null> = signal<string | null>(null);
 
   constructor(private route: ActivatedRoute) {}
 
