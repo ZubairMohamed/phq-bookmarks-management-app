@@ -53,3 +53,39 @@ main {
     border: 2px solid @error !important;
   }
 }
+
+.heading {
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+
+  &.first {
+    margin-top: 0;
+  }
+}
+
+//our custom made button styles used for all buttons
+.common-button(@name, @bg-colour) {
+  .button-@{name} {
+    padding: 0.75rem;
+    text-transform: capitalize;
+    background: @bg-colour;
+
+    &:hover {
+      background: darken(@bg-colour, 20%);
+    }
+
+    color: #fff;
+    border: none;
+
+    &:disabled {
+      background: lighten(#000, 80%);
+      color: lighten(#000, 60%);
+    }
+  }
+}
+
+.common-button(primary, @primary);
+.common-button(secondary, #4caf50);
+.common-button(danger, @error);

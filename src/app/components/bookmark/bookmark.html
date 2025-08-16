@@ -26,13 +26,17 @@
     <button
       (click)="handleAddBookmark()"
       [attr.disabled]="isButtonDisabled ? true : null"
+      class="button-primary"
     >
       Add Bookmark
     </button>
   }
 
   @if (showEdit) {
-    <button (click)="handleEdit(localIndex)">Edit</button>
+    <button (click)="handleEdit(localIndex)"
+            class="button-primary"
+
+    >Edit</button>
   }
 
   @if (showEdit) {
@@ -41,12 +45,17 @@
       [attr.disabled]="
         isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true
       "
+      class="button-secondary"
+
     >
       Save Changes
     </button>
   }
 
   @if (showDelete) {
-    <button (click)="handleDelete(globalIndex)">Delete</button>
+    <button (click)="handleDelete(globalIndex)"
+            class="button-danger"
+
+    >Delete</button>
   }
 </div>

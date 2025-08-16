@@ -1,28 +1,29 @@
-<h2 class="body-font">Add new bookmark</h2>
+<h2 class="body-font heading first">Add new bookmark</h2>
 <app-bookmark
   [originalArray]="links()"
   (originalArrayChange)="updateLinks($event)"
 />
 
+<h2 class="heading">Simulator</h2>
 <div class="test-data">
-  <h3>Simulator</h3>
-  <p>
-    Easily simulate loads of test data. Fill the database with 50 new links or
-    empty the database so that all bookmarks are deleted.
+  <p class="explainer">
+    Simulator allows you to quickly add and delete test data in our database.
+    Fill the database with 50 new links or empty the database so that all
+    bookmarks are deleted.
   </p>
 
   <div class="button-row">
-    <button class="btn-primary" (click)="fillLinksWithTestData()">
-      Populate with test data
+    <button class="button-secondary" (click)="fillLinksWithTestData()">
+      Auto Save 50 Bookmarks
     </button>
-    <button class="btn-danger" (click)="clearDatabase()">
+    <button class="button-danger" (click)="clearDatabase()">
       Delete all bookmarks
     </button>
   </div>
 </div>
 
 <div class="overview-header">
-  <h2 class="body-font">Saved Bookmarks</h2>
+  <h2 class="body-font heading">Saved Bookmarks</h2>
   @if (chunkedArray().length > 0) {
     <p>Page {{ page() + 1 }} of {{ chunkedArray().length }}</p>
   }
@@ -51,14 +52,16 @@
 
   <!--  pagination -->
   <div class="page-links">
-    <!-- go back one page button   -->
-    <button (click)="handlePageDecrease()"><</button>
-    @for (link of chunkedArray(); let index = $index; track link) {
-      <button (click)="handlePageChange(index)">{{ index + 1 }}</button>
-    }
+    @if (chunkedArray().length > 0) {
+      <!-- previous page -->
+      <button (click)="handlePageDecrease()"><</button>
+      @for (link of chunkedArray(); let index = $index; track link) {
+        <button (click)="handlePageChange(index)">{{ index + 1 }}</button>
+      }
 
-    <!--    go up one page button-->
-    <button (click)="handlePageIncrease()">></button>
-    <!--  pagination -->
+      <!-- next page -->
+      <button (click)="handlePageIncrease()">></button>
+    }
   </div>
+  <!--  pagination -->
 </div>
