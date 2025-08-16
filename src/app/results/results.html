@@ -8,8 +8,9 @@
 <div class="result-page">
   @if (queryParams() !== null && queryParams() !== "") {
     <div>
-      You have successfully submitted <span class="url">{{ queryParams() }}</span>. This has been added to
-      your database.
+      You have successfully submitted
+      <span class="url">{{ queryParams() }}</span
+      >. This has been added to your database.
     </div>
   } @else {
     <div>
