@@ -28,15 +28,14 @@
       [attr.disabled]="isButtonDisabled ? true : null"
       class="button-primary"
     >
-      Add Bookmark
+      Add <span class="hide-on-mobile">Bookmark</span>
     </button>
   }
 
   @if (showEdit) {
-    <button (click)="handleEdit(localIndex)"
-            class="button-primary"
-
-    >Edit</button>
+    <button (click)="handleEdit(localIndex)" class="button-primary">
+      Edit
+    </button>
   }
 
   @if (showEdit) {
@@ -46,16 +45,14 @@
         isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true
       "
       class="button-secondary"
-
     >
-      Save Changes
+      Save <span class="hide-on-mobile">Changes</span>
     </button>
   }
 
   @if (showDelete) {
-    <button (click)="handleDelete(globalIndex)"
-            class="button-danger"
-
-    >Delete</button>
+    <button (click)="handleDelete(globalIndex)" class="button-danger">
+      Delete
+    </button>
   }
 </div>
