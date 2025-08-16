@@ -4,17 +4,17 @@
   (originalArrayChange)="updateLinks($event)"
 />
 
-<h2 class="heading">Flight Simulator</h2>
+<h2 class="heading">Flight Simulator &#169;</h2>
 <div class="test-data">
   <p class="explainer">
-    Flight Simulator &#169; allows you to quickly add and delete test data in
-    our database. Fill the database with 50 new links or empty the database so
-    that all bookmarks are deleted.
+    Flight Simulator allows you to quickly add and delete test data in our
+    database. Fill the database with 50 new links or empty the database so that
+    all bookmarks are deleted.
   </p>
 
   <div class="button-row">
     <button class="button-secondary" (click)="fillLinksWithTestData()">
-      Auto Save 50 Bookmarks
+      Save 50 Bookmarks
     </button>
     <button class="button-danger" (click)="clearDatabase()">
       Delete all bookmarks
@@ -25,7 +25,10 @@
 <div class="overview-header">
   <h2 class="body-font heading">Saved Bookmarks</h2>
   @if (chunkedArray().length > 0) {
-    <p>Page {{ page() + 1 }} of {{ chunkedArray().length }}</p>
+    <p>
+      <span class="hide-on-mobile">Page</span> {{ page() + 1 }} of
+      {{ chunkedArray().length }}
+    </p>
   }
 </div>
 

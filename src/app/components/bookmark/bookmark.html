@@ -10,7 +10,7 @@
   }
 
   @if (showEdit) {
-    <div class="count">
+    <div class="count hide-on-mobile">
       {{ localIndex < 10 ? "0" + localIndex : localIndex }}
     </div>
     <input
@@ -28,13 +28,13 @@
       [attr.disabled]="isButtonDisabled ? true : null"
       class="button-primary"
     >
-      Add <span class="hide-on-mobile">Bookmark</span>
+      ✚ <span class="hide-on-mobile">Add Bookmark</span>
     </button>
   }
 
   @if (showEdit) {
     <button (click)="handleEdit(localIndex)" class="button-primary">
-      Edit
+      📝 <span class="hide-on-mobile">Edit</span>
     </button>
   }
 
@@ -46,13 +46,13 @@
       "
       class="button-secondary"
     >
-      Save <span class="hide-on-mobile">Changes</span>
+      💾 <span class="hide-on-mobile">Save Changes</span>
     </button>
   }
 
   @if (showDelete) {
     <button (click)="handleDelete(globalIndex)" class="button-danger">
-      Delete
+      🗑️ <span class="hide-on-mobile">Delete</span>
     </button>
   }
 </div>
