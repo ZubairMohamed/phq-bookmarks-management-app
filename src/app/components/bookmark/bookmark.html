@@ -2,10 +2,10 @@
   @if (showAdd) {
     <input
       (input)="validateAddBookmarkLink()"
-      placeholder="Enter link here"
+      placeholder="Enter link here e.g. https://example.com"
       type="text"
       [(ngModel)]="bookmark"
-      [attr.class]="!isButtonDisabled ? 'is-valid' : 'is-invalid'"
+      [attr.class]="!isButtonDisabled() ? 'is-valid' : 'is-invalid'"
     />
   }
 
@@ -15,9 +15,9 @@
     </div>
     <input
       (input)="validateEditBookmarkLink()"
-      [attr.value]="savedBookmarkText"
-      [attr.readonly]="bookMarkIsEditable ? null : true"
-      [attr.class]="isEditableLinkValid ? 'is-valid' : 'is-invalid'"
+      [attr.value]="savedBookmarkText()"
+      [attr.readonly]="bookMarkIsEditable() ? null : true"
+      [attr.class]="isEditableLinkValid() ? 'is-valid' : 'is-invalid'"
       [(ngModel)]="savedBookmarkText"
       placeholder="Enter link here"
     />
@@ -26,7 +26,7 @@
   @if (showAdd) {
     <button
       (click)="handleAddBookmark()"
-      [attr.disabled]="isButtonDisabled ? true : null"
+      [attr.disabled]="isButtonDisabled() ? true : null"
       class="button-primary"
     >
       ✚ <span class="hide-on-mobile">Add Bookmark</span>
@@ -34,16 +34,16 @@
   }
 
   @if (showEdit) {
-    <button (click)="handleEdit(localIndex)" class="button-primary">
+    <button (click)="handleEdit()" class="button-primary">
       📝 <span class="hide-on-mobile">Edit</span>
     </button>
   }
 
   @if (showEdit) {
     <button
-      (click)="handleSave(savedBookmarkText, globalIndex)"
+      (click)="handleSave(savedBookmarkText(), globalIndex)"
       [attr.disabled]="
-        isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true
+        !isEditableLinkValid() ? true : bookMarkIsEditable() ? null : true
       "
       class="button-secondary"
     >

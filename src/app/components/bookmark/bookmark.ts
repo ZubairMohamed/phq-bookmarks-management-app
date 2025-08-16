@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,36 +24,40 @@ export class Bookmark {
   @Input() showDelete: boolean = false;
   @Input() value!: string;
   @Input() originalArray!: string[];
-  @Input() localIndex!: number; //this is the position of the element in the sub-divided array
+  @Input() localIndex!: number; //this is the position of the element in the subdivided array
   @Input() globalIndex!: number; //this is the position of the element in the master copy of the array. This is required so that we can easily make edits and deletes
+  @Input() isFirst: boolean = false; //this works out if we are rendering the first saved bookmark on the page
 
-  @Output() originalArrayChange = new EventEmitter<string[]>();
+  // this is a prop passed from child to parent so that the parent listens to changes in the links arrays in the child component
+  @Output() originalArrayChange: EventEmitter<string[]> = new EventEmitter<
+    string[]
+  >();
 
   constructor(private router: Router) {}
 
   handleSave(newURL: string, indexOfArrayElementToUpdate: number) {
-    this.bookMarkIsEditable = false;
+    this.bookMarkIsEditable.set(false);
     this.modifyOriginalArrayFromParent(
       'edit',
       indexOfArrayElementToUpdate,
       newURL,
     );
   }
-  handleEdit(index: number) {
-    this.bookMarkIsEditable = true;
+  handleEdit(): void {
+    this.bookMarkIsEditable.set(true);
   }
   handleDelete(indexOfArrayElementToDelete: number) {
     this.modifyOriginalArrayFromParent('delete', indexOfArrayElementToDelete);
   }
   // properties unique to add bookmark component
-  bookmark: string = '';
-  isButtonDisabled: boolean = true;
-  isEditableLinkValid: boolean = true;
-  bookMarkIsEditable: boolean = false;
-  savedBookmarkText: string = '';
+  bookmark: WritableSignal<string> = signal<string>('');
+  isButtonDisabled: WritableSignal<boolean> = signal<boolean>(true);
+  isEditableLinkValid: WritableSignal<boolean> = signal<boolean>(true);
+  bookMarkIsEditable: WritableSignal<boolean> = signal<boolean>(false);
+  savedBookmarkText: WritableSignal<string> = signal<string>('');
 
   ngOnInit(): void {
-    this.savedBookmarkText = this.value ? this.value : 'http://example.com';
+    this.savedBookmarkText.set(this.value ? this.value : 'https://example.com');
   }
 
   // tests to see if the text inside the input text field is valid
@@ -56,11 +67,11 @@ export class Bookmark {
       return false;
     }
 
-    var a = document.createElement('a');
+    let a = document.createElement('a');
     a.href = str;
     let result = a.host && a.host != window.location.host;
 
-    // if the result is not equal to a boolean value return false i.e undefined or null
+    // if the result is not equal to a boolean value return false i.e. undefined or null
     if (result !== true && result !== false) {
       return false;
     } else {
@@ -70,14 +81,16 @@ export class Bookmark {
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateAddBookmarkLink() {
-    this.isButtonDisabled =
-      this.isValidHttpUrl(this.bookmark) === false ? true : false;
+    this.isButtonDisabled.set(
+      this.isValidHttpUrl(this.bookmark()) === false ? true : false,
+    );
   }
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateEditBookmarkLink() {
-    this.isEditableLinkValid =
-      this.isValidHttpUrl(this.savedBookmarkText) === false ? false : true;
+    this.isEditableLinkValid.set(
+      this.isValidHttpUrl(this.savedBookmarkText()) === false ? false : true,
+    );
   }
 
   // this is an event triggered on clicking the add bookmark button.
@@ -89,7 +102,7 @@ export class Bookmark {
   ): void {
     switch (actionToPerform) {
       case 'add':
-        this.originalArrayChange.emit([...this.originalArray, this.bookmark]);
+        this.originalArrayChange.emit([...this.originalArray, this.bookmark()]);
         break;
       case 'edit':
         // create a temp copy of the original array
@@ -102,25 +115,25 @@ export class Bookmark {
         let tempArrayForDeletion: string[] = [...this.originalArray];
         // now modify the temp copy to remove the element we no longer need
         tempArrayForDeletion.splice(indexOfArrayElementToModify, 1);
-        // now we are notifying the parent element to modify the original copy of the array and propogate changes back to the child components
+        // now we are notifying the parent element to modify the original copy of the array and propagate changes back to the child components
         this.originalArrayChange.emit([...tempArrayForDeletion]);
         break;
     }
   }
 
   // this event happens when the add bookmark button is clicked on
-  handleAddBookmark() {
+  handleAddBookmark(): void {
     this.validateAddBookmarkLink();
     // we are adding a new bookmark to the original array of bookmarks
     // this.originalArray.push(this.bookmark);
     this.modifyOriginalArrayFromParent();
 
     // we are encoding the current bookmark as url Text string
-    let encodedBookmarkText = encodeURIComponent(this.bookmark);
+    let encodedBookmarkText = encodeURIComponent(this.bookmark());
 
     // Clear the input field after adding
-    this.bookmark = '';
-    this.isButtonDisabled = true;
+    this.bookmark.set('');
+    this.isButtonDisabled.set(true);
 
     this.router.navigate(['/results'], {
       queryParams: { url: encodedBookmarkText },

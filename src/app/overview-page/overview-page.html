@@ -1,9 +1,12 @@
+<!--add new bookmark section -->
 <h2 class="body-font heading first">Add new bookmark</h2>
 <app-bookmark
   [originalArray]="links()"
   (originalArrayChange)="updateLinks($event)"
 />
+<!--add new bookmark section -->
 
+<!-- flight sim section -->
 <h2 class="heading">Flight Simulator &#169;</h2>
 <div class="test-data">
   <p class="explainer">
@@ -21,7 +24,9 @@
     </button>
   </div>
 </div>
+<!-- flight sim section -->
 
+<!-- Saved bookmarks header -->
 <div class="overview-header">
   <h2 class="body-font heading">Saved Bookmarks</h2>
   @if (chunkedArray().length > 0) {
@@ -31,7 +36,10 @@
     </p>
   }
 </div>
+<!-- Saved bookmarks header -->
 
+
+<!-- saved bookmarks section -->
 <div class="pagination-container">
   @if (chunkedArray().length == 0) {
     <div class="no-saved-bookmarks">
@@ -40,7 +48,7 @@
     </div>
   }
 
-  @for (link of chunkedArray()[page()]; let index = $index; track link) {
+  @for (link of chunkedArray()[page()]; let index = $index; let isFirst = $first ;track link) {
     <app-bookmark
       (originalArrayChange)="updateLinks($event)"
       [showAdd]="false"
@@ -50,6 +58,7 @@
       [originalArray]="links()"
       [localIndex]="index"
       [globalIndex]="calculateGlobalIndex(index)"
+      [isFirst]="isFirst"
     />
   }
 
@@ -75,3 +84,4 @@
   </div>
   <!--  pagination -->
 </div>
+<!-- saved bookmarks section -->
