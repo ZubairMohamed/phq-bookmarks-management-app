@@ -7,9 +7,9 @@
 <h2 class="heading">Flight Simulator &#169;</h2>
 <div class="test-data">
   <p class="explainer">
-    Flight Simulator allows you to quickly add and delete test data in our
-    database. Fill the database with 50 new links or empty the database so that
-    all bookmarks are deleted.
+    Flight Simulator allows you to quickly add and delete test data into your
+    database. Automatically save 50 new links or clear the database so that all
+    bookmarks are deleted.
   </p>
 
   <div class="button-row">
@@ -59,7 +59,12 @@
       <!-- previous page -->
       <button class="button-secondary" (click)="handlePageDecrease()"><</button>
       @for (link of chunkedArray(); let index = $index; track link) {
-        <button class="button-secondary" (click)="handlePageChange(index)">
+        <button
+          class="button-secondary {{
+            page() === index ? 'current-page-number' : ''
+          }}"
+          (click)="handlePageChange(index)"
+        >
           {{ index + 1 }}
         </button>
       }
