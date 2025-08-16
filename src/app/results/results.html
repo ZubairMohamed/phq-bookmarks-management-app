@@ -1,6 +1,6 @@
 <h2 class="heading first">
   @if (queryParams() !== null && queryParams() !== "") {
-    Your bookmark has been saved!
+    Thank you for your submission!
   } @else {
     oops!
   }
@@ -8,7 +8,7 @@
 <div class="result-page">
   @if (queryParams() !== null && queryParams() !== "") {
     <div>
-      The URL <span class="url">{{ queryParams() }}</span> has been added to
+      You have successfully submitted <span class="url">{{ queryParams() }}</span>. This has been added to
       your database.
     </div>
   } @else {
