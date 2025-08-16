@@ -1,48 +1,64 @@
 <h2 class="body-font">Add new bookmark</h2>
-<app-bookmark [originalArray]="links()" (originalArrayChange)="updateLinks($event)" />
+<app-bookmark
+  [originalArray]="links()"
+  (originalArrayChange)="updateLinks($event)"
+/>
 
 <div class="test-data">
-  <h3>Test Data</h3>
-  <p>Easily simulate loads of test data. Fill the database with 50 new links or empty the database so that all bookmarks are deleted.</p>
+  <h3>Simulator</h3>
+  <p>
+    Easily simulate loads of test data. Fill the database with 50 new links or
+    empty the database so that all bookmarks are deleted.
+  </p>
 
   <div class="button-row">
-    <button class="btn-primary" (click)="fillLinksWithTestData()">Populate with test data</button>
-    <button class="btn-danger" (click)="clearDatabase()">Delete all bookmarks</button>
+    <button class="btn-primary" (click)="fillLinksWithTestData()">
+      Populate with test data
+    </button>
+    <button class="btn-danger" (click)="clearDatabase()">
+      Delete all bookmarks
+    </button>
   </div>
-
 </div>
 
 <div class="overview-header">
   <h2 class="body-font">Saved Bookmarks</h2>
   @if (chunkedArray().length > 0) {
-    <p>Page {{page() + 1}} of {{chunkedArray().length}}</p>
-
+    <p>Page {{ page() + 1 }} of {{ chunkedArray().length }}</p>
   }
 </div>
 
 <div class="pagination-container">
-
   @if (chunkedArray().length == 0) {
-    <div class="no-saved-bookmarks">There are no saved bookmarks. Add a bookmark using the form above. Return here to manage saved bookmarks.</div>
+    <div class="no-saved-bookmarks">
+      There are no saved bookmarks. Add a bookmark using the form above. Return
+      here to manage saved bookmarks.
+    </div>
   }
 
-  @for (link of chunkedArray()[page()]; let index = $index; track link;) {
-      <app-bookmark (originalArrayChange)="updateLinks($event)" [showAdd]="false" [showDelete]="true" [showEdit]="true" [value]="link" [originalArray]="links()" [localIndex]="index" [globalIndex]="calculateGlobalIndex(index)"   />
+  @for (link of chunkedArray()[page()]; let index = $index; track link) {
+    <app-bookmark
+      (originalArrayChange)="updateLinks($event)"
+      [showAdd]="false"
+      [showDelete]="true"
+      [showEdit]="true"
+      [value]="link"
+      [originalArray]="links()"
+      [localIndex]="index"
+      [globalIndex]="calculateGlobalIndex(index)"
+    />
   }
 
   <!--  pagination -->
   <div class="page-links">
     <!-- go back one page button   -->
     <button (click)="handlePageDecrease()"><</button>
-    @for (link of chunkedArray(); let index = $index; track  link) {
-      <button (click)="handlePageChange(index)">{{index + 1}}</button>
+    @for (link of chunkedArray(); let index = $index; track link) {
+      <button (click)="handlePageChange(index)">{{ index + 1 }}</button>
     }
 
     <!--    go up one page button-->
     <button (click)="handlePageIncrease()">></button>
     <!--  pagination -->
-
   </div>
-
-
 </div>

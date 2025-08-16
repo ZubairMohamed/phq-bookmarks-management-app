@@ -1,8 +1,10 @@
 <div class="result-page">
-  @if (queryParams() !== null && queryParams() !== '') {
-    <div>The URL {{queryParams()}} has been added to your database.</div>
+  @if (queryParams() !== null && queryParams() !== "") {
+    <div>The URL {{ queryParams() }} has been added to your database.</div>
   } @else {
-    <div>Please check that your bookmark is valid and try adding another one.</div>
+    <div>
+      Please check that your bookmark is valid and try adding another one.
+    </div>
   }
 
   <div class="return-to-overview">
@@ -10,6 +12,3 @@
     <a routerLink="/">Return to the overview page</a>
   </div>
 </div>
-
-
-

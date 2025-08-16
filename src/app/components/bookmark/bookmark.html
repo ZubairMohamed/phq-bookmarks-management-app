@@ -10,7 +10,9 @@
   }
 
   @if (showEdit) {
-    <div class="count">{{localIndex < 10 ? '0' + localIndex: localIndex}}</div>
+    <div class="count">
+      {{ localIndex < 10 ? "0" + localIndex : localIndex }}
+    </div>
     <input
       (input)="validateEditBookmarkLink()"
       [attr.value]="savedBookmarkText"
@@ -30,15 +32,15 @@
   }
 
   @if (showEdit) {
-    <button (click)="handleEdit(localIndex)">
-      Edit
-    </button>
+    <button (click)="handleEdit(localIndex)">Edit</button>
   }
 
   @if (showEdit) {
     <button
       (click)="handleSave(savedBookmarkText, globalIndex)"
-      [attr.disabled]="isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true"
+      [attr.disabled]="
+        isEditableLinkValid === false ? true : bookMarkIsEditable ? null : true
+      "
     >
       Save Changes
     </button>
