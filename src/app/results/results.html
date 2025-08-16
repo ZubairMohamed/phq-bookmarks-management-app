@@ -1,6 +1,16 @@
+<h2 class="heading first">
+  @if (queryParams() !== null && queryParams() !== "") {
+    Your bookmark has been saved!
+  } @else {
+    oops!
+  }
+</h2>
 <div class="result-page">
   @if (queryParams() !== null && queryParams() !== "") {
-    <div>The URL {{ queryParams() }} has been added to your database.</div>
+    <div>
+      The URL <span class="url">{{ queryParams() }}</span> has been added to
+      your database.
+    </div>
   } @else {
     <div>
       Please check that your bookmark is valid and try adding another one.
@@ -9,6 +19,10 @@
 
   <div class="return-to-overview">
     <p>See all of your saved bookmarks on the overview page.</p>
-    <a routerLink="/">Return to the overview page</a>
+    <br />
+
+    <a class="button-link" routerLink="/">Return to the overview page</a>
+    <br />
+    <br />
   </div>
 </div>

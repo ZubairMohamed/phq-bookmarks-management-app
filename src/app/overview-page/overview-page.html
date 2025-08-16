@@ -14,10 +14,10 @@
 
   <div class="button-row">
     <button class="button-secondary" (click)="fillLinksWithTestData()">
-      Save 50 Bookmarks
+      💾 Save 50 Bookmarks
     </button>
     <button class="button-danger" (click)="clearDatabase()">
-      Delete all bookmarks
+      🗑️ Delete all bookmarks
     </button>
   </div>
 </div>
@@ -57,13 +57,15 @@
   <div class="page-links">
     @if (chunkedArray().length > 0) {
       <!-- previous page -->
-      <button (click)="handlePageDecrease()"><</button>
+      <button class="button-secondary" (click)="handlePageDecrease()"><</button>
       @for (link of chunkedArray(); let index = $index; track link) {
-        <button (click)="handlePageChange(index)">{{ index + 1 }}</button>
+        <button class="button-secondary" (click)="handlePageChange(index)">
+          {{ index + 1 }}
+        </button>
       }
 
       <!-- next page -->
-      <button (click)="handlePageIncrease()">></button>
+      <button class="button-secondary" (click)="handlePageIncrease()">></button>
     }
   </div>
   <!--  pagination -->

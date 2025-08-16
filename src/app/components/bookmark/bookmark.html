@@ -2,7 +2,7 @@
   @if (showAdd) {
     <input
       (input)="validateAddBookmarkLink()"
-      placeholder="enter link here"
+      placeholder="Enter link here"
       type="text"
       [(ngModel)]="bookmark"
       [attr.class]="!isButtonDisabled ? 'is-valid' : 'is-invalid'"
@@ -19,6 +19,7 @@
       [attr.readonly]="bookMarkIsEditable ? null : true"
       [attr.class]="isEditableLinkValid ? 'is-valid' : 'is-invalid'"
       [(ngModel)]="savedBookmarkText"
+      placeholder="Enter link here"
     />
   }
 

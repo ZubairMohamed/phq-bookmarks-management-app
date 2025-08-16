@@ -27,9 +27,11 @@ main {
 }
 
 //colour system inspired from material ui colours
-@error: #b71c1c;
 
-@primary: #0d47a1;
+@primary: lighten(#000000, 25%);
+@secondary: #8bc34a;
+@error: #c62828;
+
 .error {
   color: @error;
 
@@ -69,8 +71,10 @@ main {
 .common-button(@name, @bg-colour) {
   .button-@{name} {
     padding: 0.75rem;
-    text-transform: capitalize;
+    text-decoration: none;
     background: @bg-colour;
+    font-weight: 700;
+    text-transform: uppercase;
 
     &:hover {
       background: darken(@bg-colour, 20%);
@@ -86,8 +90,22 @@ main {
   }
 }
 
+.button-link {
+  text-decoration: none;
+  padding: 1rem;
+  border: 1px solid @primary;
+  text-transform: uppercase;
+  color: @primary;
+
+  &:hover,
+  &:focus {
+    background: @primary;
+    color: #ffffff;
+  }
+}
+
 .common-button(primary, @primary);
-.common-button(secondary, #009688);
+.common-button(secondary, @secondary);
 .common-button(danger, @error);
 
 //at 700px we are hiding elements to make them mobile friendly
@@ -95,4 +113,23 @@ main {
   .hide-on-mobile {
     display: none !important;
   }
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px;
 }
