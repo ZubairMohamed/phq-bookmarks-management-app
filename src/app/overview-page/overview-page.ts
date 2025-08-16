@@ -10,109 +10,9 @@ import { Bookmark } from '../components/bookmark/bookmark';
 export class OverviewPage {
   page = signal(0);
 
-  links = signal([
-    'https://google.com',
-    'https://youtube.com',
-    'https://facebook.com',
-    'https://instagram.com',
-    'https://chatgpt.com',
-    'https://wikipedia.org',
-    'https://reddit.com',
-    'https://x.com',
-    'https://whatsapp.com',
-    'https://bing.com',
-    'https://amazon.com',
-    'https://yahoo.com',
-    'https://temu.com',
-    'https://duckduckgo.com',
-    'https://yahoo.co.jp',
-    'https://tiktok.com',
-    'https://yandex.ru',
-    'https://weather.com',
-    'https://microsoftonline.com',
-    'https://msn.com',
-    'https://microsoft.com',
-    'https://live.com',
-    'https://fandom.com',
-    'https://linkedin.com',
-    'https://netflix.com',
-    'https://pinterest.com',
-    'https://twitch.tv',
-    'https://openai.com',
-    'https://naver.com',
-    'https://office.com',
-    'https://canva.com',
-    'https://vk.com',
-    'https://paypal.com',
-    'https://aliexpress.com',
-    'https://discord.com',
-    'https://github.com',
-    'https://spotify.com',
-    'https://apple.com',
-    'https://imdb.com',
-    'https://bilibili.com',
-    'https://roblox.com',
-    'https://globo.com',
-    'https://amazon.co.jp',
-    'https://nytimes.com',
-    'https://samsung.com',
-    'https://mail.ru',
-    'https://ebay.com',
-    'https://quora.com',
-    'https://walmart.com',
-    'https://bbc.co.uk',
-    'https://amazon.de',
-    'https://telegram.org',
-    'https://dailymotion.com',
-    'https://coupang.com',
-    'https://bbc.com',
-    'https://booking.com',
-    'https://espn.com',
-    'https://brave.com',
-    'https://cnn.com',
-    'https://indeed.com',
-    'https://rakuten.co.jp',
-    'https://google.com.br',
-    'https://google.co.uk',
-    'https://zoom.us',
-    'https://adobe.com',
-    'https://usps.com',
-    'https://amazon.co.uk',
-    'https://ozon.ru',
-    'https://cricbuzz.com',
-    'https://accuweather.com',
-    'https://etsy.com',
-    'https://uol.com.br',
-    'https://dzen.ru',
-    'https://steampowered.com',
-    'https://shop.app',
-    'https://marca.com',
-    'https://rutube.ru',
-    'https://shopify.com',
-    'https://steamcommunity.com',
-    'https://ecosia.org',
-    'https://infobae.com',
-    'https://google.de',
-    'https://disneyplus.com',
-    'https://theguardian.com',
-    'https://primevideo.com',
-    'https://gmail.com',
-    'https://zillow.com',
-    'https://dailymail.co.uk',
-    'https://amazon.in',
-    'https://linktree.ee',
-    'https://people.com',
-    'https://google.it',
-    'https://instructure.com',
-    'https://google.es',
-    'https://shein.com',
-    'https://messenger.com',
-    'https://max.com',
-    'https://wildberries.ru',
-    'https://avito.ru',
-    'https://sony.com',
-    'http://samsung.com',
-  ]);
+  links = signal<string[]>([]);
+
+  linksPerPage: number = 20; //this variable controls how many bookmarks to display per page
 
   splitArray(originalArray: string[], size: number) {
     let result = [];
@@ -124,7 +24,9 @@ export class OverviewPage {
   }
 
   // create an array of chunks of 20 items per array of arrays
-  chunkedArray = computed(() => this.splitArray(this.links(), 20));
+  chunkedArray = computed(() =>
+    this.splitArray(this.links(), this.linksPerPage),
+  );
 
   handlePageChange(number: number) {
     this.page.set(number);
@@ -152,5 +54,91 @@ export class OverviewPage {
     this.links.set(newLinks);
     // Reset to first page when links are updated
     this.page.set(0);
+
+    this.logLinks();
+  }
+
+  ngOnInit(): void {
+    //called after angular has initialized all data-bound properties of a directive
+    let storedString: string | null = localStorage.getItem('bookmarks');
+    let bookmarksArray: string[] = [];
+
+    if (typeof storedString === 'string' && storedString.length > 0) {
+      bookmarksArray = JSON.parse(storedString);
+      this.links.set(bookmarksArray);
+    }
+  }
+
+  private logLinks() {
+    //   we are also saving to local storage the end result
+    const arrayAsString = JSON.stringify(this.links());
+
+    // Save the JSON string to local storage with a key 'myArrayKey'
+    localStorage.setItem('bookmarks', arrayAsString);
+  }
+
+  calculateGlobalIndex(localIndex: number) {
+    return this.page() * this.linksPerPage + localIndex;
+  }
+
+  protected readonly localStorage = localStorage;
+
+  fillLinksWithTestData() {
+    this.updateLinks([
+      'https://google.com',
+      'https://youtube.com',
+      'https://facebook.com',
+      'https://amazon.com',
+      'https://yahoo.com',
+      'https://wikipedia.org',
+      'https://twitter.com',
+      'https://bing.com',
+      'https://microsoft.com',
+      'https://instagram.com',
+      'https://linkedin.com',
+      'https://pinterest.com',
+      'https://ebay.com',
+      'https://netflix.com',
+      'https://reddit.com',
+      'https://cnn.com',
+      'https://apple.com',
+      'https://nytimes.com',
+      'https://imgur.com',
+      'https://espn.com',
+      'https://weather.com',
+      'https://paypal.com',
+      'https://github.com',
+      'https://wordpress.com',
+      'https://huffpost.com',
+      'https://salesforce.com',
+      'https://adobe.com',
+      'https://imdb.com',
+      'https://msn.com',
+      'https://walmart.com',
+      'https://craigslist.org',
+      'https://bankofamerica.com',
+      'https://fedex.com',
+      'https://chase.com',
+      'https://usps.com',
+      'https://target.com',
+      'https://wellsfargo.com',
+      'https://zillow.com',
+      'https://etsy.com',
+      'https://quora.com',
+      'https://webmd.com',
+      'https://cnet.com',
+      'https://fandom.com',
+      'https://indeed.com',
+      'https://spotify.com',
+      'https://foxnews.com',
+      'https://forbes.com',
+      'https://theguardian.com',
+      'https://stackoverflow.com',
+      'https://twitch.tv',
+    ]);
+  }
+
+  clearDatabase() {
+    this.updateLinks([]);
   }
 }

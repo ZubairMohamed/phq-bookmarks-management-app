@@ -1,1 +1,15 @@
-<p>results works!</p>
+<div class="result-page">
+  @if (queryParams() !== null && queryParams() !== '') {
+    <div>The URL {{queryParams()}} has been added to your database.</div>
+  } @else {
+    <div>Please check that your bookmark is valid and try adding another one.</div>
+  }
+
+  <div class="return-to-overview">
+    <p>See all of your saved bookmarks on the overview page.</p>
+    <a routerLink="/">Return to the overview page</a>
+  </div>
+</div>
+
+
+
