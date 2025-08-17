@@ -19,6 +19,7 @@ This project uses the latest stable version of Angular. The specific version is 
 9. LocalStorage is used as our "database" since we are limited to front end technologies. We store our array of bookmarks as a local storage item. We could easily substitute this for any other local or backend form of storage. On page refresh the previously stored bookmarks are reloaded into the list of saved bookmarks within Angular.
 10. Prettier is used to maintain consistent code quality and formatting across different workstations and authors. Most IDE's support autoformat on save when used in conjunction with prettier. To manually run prettier I have created an npm script. Simply run `npm run pretty` in the root folder of this project using terminal. Make sure all node packages are installed using `npm install`.
 11. https://websitemockupgenerator.com/ was used to generate mockup images of our powerful app.
+12. This project has been tested on major browsers e.g. Microsoft Edge (Chromium), iOS Safari, Mozilla Firefox. 
 
 ## Getting Started with this project
 

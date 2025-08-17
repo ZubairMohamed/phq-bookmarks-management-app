@@ -51,7 +51,7 @@
     link of chunkedArray()[page()];
     let index = $index;
     let isFirst = $first;
-    track link
+    track link + index
   ) {
     <app-bookmark
       (originalArrayChange)="updateLinks($event)"
@@ -71,7 +71,7 @@
     @if (chunkedArray().length > 0) {
       <!-- previous page -->
       <button class="button-primary" (click)="handlePageDecrease()"><</button>
-      @for (link of chunkedArray(); let index = $index; track link) {
+      @for (link of chunkedArray(); let index = $index; track link + index) {
         <button
           class="button-primary {{
             page() === index ? 'current-page-number' : ''
