@@ -52,6 +52,7 @@ export class Bookmark {
   // properties unique to add bookmark component
   bookmark: WritableSignal<string> = signal<string>('');
   isButtonDisabled: WritableSignal<boolean> = signal<boolean>(true);
+  isNewBookmarkValid: WritableSignal<boolean> = signal<boolean>(false);
   isEditableLinkValid: WritableSignal<boolean> = signal<boolean>(true);
   bookMarkIsEditable: WritableSignal<boolean> = signal<boolean>(false);
   savedBookmarkText: WritableSignal<string> = signal<string>('');
@@ -64,6 +65,14 @@ export class Bookmark {
   isValidHttpUrl(str: string) {
     // is the text inside the input empty
     if (str.length <= 0 || str == '') {
+      return false;
+    }
+
+    // we are enforcing that the url begins with http:// or https://
+    if (
+      !str.toString().toLowerCase().startsWith('http://') ||
+      !str.toString().toLowerCase().startsWith('https://')
+    ) {
       return false;
     }
 
@@ -81,6 +90,7 @@ export class Bookmark {
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
   validateAddBookmarkLink() {
+    this.isNewBookmarkValid.set(this.isValidHttpUrl(this.bookmark()));
     this.isButtonDisabled.set(
       this.isValidHttpUrl(this.bookmark()) === false ? true : false,
     );
@@ -135,8 +145,12 @@ export class Bookmark {
     this.bookmark.set('');
     this.isButtonDisabled.set(true);
 
-    this.router.navigate(['/results'], {
-      queryParams: { url: encodedBookmarkText },
-    });
+    this.router
+      .navigate(['/results'], {
+        queryParams: { url: encodedBookmarkText },
+      })
+      .then(() => {
+        //do nothing further
+      });
   }
 }

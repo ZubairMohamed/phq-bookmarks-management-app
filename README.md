@@ -1,4 +1,25 @@
-# PhqBookmarksApp
+# Welcome to the Bookmarks Management App powered by PHQ
+
+A live deployed version of the site can be found at https://phq-bookmarks.netlify.app/
+
+## Design decisions & Assumptions
+
+1. Since a design was not provided I opted to use my best judgement. The app uses rem units so that all fonts, spacing, typography, padding, margins are relative to the base font size of the browser.
+2. The design is based on MUI colours and inspired by https://materialuicolors.co/
+3. Project brief stipulates that we should use only HTML,CSS, JS or Angular. Hence, no external CSS or JS libraries were used. For example I could have used `fontawesome` or `material ui` icons but because of this stipulation I opted to use `emojis` instead.
+
+## Getting Started with this project
+
+1. Make sure you have the latest LTS version of Node & npm installed on your system. It is recommended to use nvm (node version maanger).
+2. Clone this repo
+3. Using terminal in the root folder of this project run `npm install`
+4. When all packages are installed run `npm start` this will start a web server at `http://localhost:4200`
+
+## Node Version
+
+This project was built using the latest version of NodeJS LTS - v22.18.0. You can easily manage node version using node version manager.
+
+## Angular Tips & More Information
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
 
