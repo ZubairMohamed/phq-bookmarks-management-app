@@ -35,7 +35,7 @@ export class Bookmark {
 
   constructor(private router: Router) {}
 
-  handleSave(newURL: string, indexOfArrayElementToUpdate: number) {
+  handleSave(newURL: string, indexOfArrayElementToUpdate: number): void {
     this.bookMarkIsEditable.set(false);
     this.modifyOriginalArrayFromParent(
       'edit',
@@ -62,7 +62,7 @@ export class Bookmark {
   }
 
   // tests to see if the text inside the input text field is valid
-  isValidHttpUrl(str: string) {
+  isValidHttpUrl(str: string): boolean {
     // is the text inside the input empty
     if (str.length <= 0 || str == '') {
       return false;
@@ -89,7 +89,7 @@ export class Bookmark {
   }
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
-  validateAddBookmarkLink() {
+  validateAddBookmarkLink(): void {
     this.isNewBookmarkValid.set(this.isValidHttpUrl(this.bookmark()));
     this.isButtonDisabled.set(
       this.isValidHttpUrl(this.bookmark()) === false ? true : false,
@@ -97,7 +97,7 @@ export class Bookmark {
   }
 
   // on input of the input text field we are checking to see if the URL is valid and setting the bool value
-  validateEditBookmarkLink() {
+  validateEditBookmarkLink(): void {
     this.isEditableLinkValid.set(
       this.isValidHttpUrl(this.savedBookmarkText()) === false ? false : true,
     );

@@ -17,7 +17,7 @@ export class OverviewPage {
 
   protected readonly localStorage: Storage = localStorage;
 
-  splitArray(originalArray: string[], size: number) {
+  splitArray(originalArray: string[], size: number): string[][] {
     let result = [];
     for (let i = 0; i < originalArray.length; i = i + size) {
       result.push(originalArray.slice(i, i + size));
@@ -31,11 +31,11 @@ export class OverviewPage {
     this.splitArray(this.links(), this.linksPerPage()),
   );
 
-  handlePageChange(number: number) {
+  handlePageChange(number: number): void {
     this.page.set(number);
   }
 
-  handlePageDecrease() {
+  handlePageDecrease(): void {
     const currentPage = this.page();
     if (currentPage - 1 < 0) {
       return;
@@ -44,7 +44,7 @@ export class OverviewPage {
     }
   }
 
-  handlePageIncrease() {
+  handlePageIncrease(): void {
     const currentPage = this.page();
     if (currentPage + 1 >= this.chunkedArray().length) {
       // do nothing
@@ -53,7 +53,7 @@ export class OverviewPage {
     }
   }
 
-  updateLinks(newLinks: string[]) {
+  updateLinks(newLinks: string[]): void {
     this.links.set(newLinks);
     // Reset to first page when links are updated
     this.page.set(0);
@@ -72,7 +72,7 @@ export class OverviewPage {
     }
   }
 
-  private logLinks() {
+  private logLinks(): void {
     //   we are also saving to local storage the end result
     const arrayAsString = JSON.stringify(this.links());
 
@@ -80,11 +80,11 @@ export class OverviewPage {
     localStorage.setItem('bookmarks', arrayAsString);
   }
 
-  calculateGlobalIndex(localIndex: number) {
+  calculateGlobalIndex(localIndex: number): number {
     return this.page() * this.linksPerPage() + localIndex;
   }
 
-  fillLinksWithTestData() {
+  fillLinksWithTestData(): void {
     this.updateLinks([
       'https://google.com',
       'https://youtube.com',
