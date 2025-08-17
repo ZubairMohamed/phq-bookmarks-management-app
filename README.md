@@ -14,6 +14,7 @@ This project uses the latest stable version of Angular. The specific version is 
 6. A bookmark is also referred to as a link, or URL.
 7. Bookmarks must begin with either http:// or https://
 8. Since we are limited to front end technologies only it is not feasible to completely check if a link exists according to the project brief. This would likely require a third party service or backend technologies which we are not using because of the conditions of this project.
+9. LocalStorage is used as our "database" since we are limited to front end technologies we store our array of bookmarks as a local storage item. We could easily substitute this for any other local or backend form of storage.
 
 ## Getting Started with this project
 
