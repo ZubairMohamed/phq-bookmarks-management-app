@@ -139,7 +139,7 @@ export class OverviewPage {
     ]);
   }
 
-  // function used by flight simulator to clearn the database
+  // function used by flight simulator to clear the database
   clearDatabase(): void {
     this.updateLinks([]);
   }
