@@ -70,7 +70,7 @@ export class Bookmark {
 
     // we are enforcing that the url begins with http:// or https://
     if (
-      !str.toString().toLowerCase().startsWith('http://') ||
+      !str.toString().toLowerCase().startsWith('http://') &&
       !str.toString().toLowerCase().startsWith('https://')
     ) {
       return false;
