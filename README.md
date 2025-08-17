@@ -1,5 +1,7 @@
 # Welcome to the Bookmarks Management App powered by PHQ
 
+![Image showing the bookmarks maangement app across three different screen sizes, mobile, tablet, desktop](./images/website-screenshot.png "Bookmarks Management App")
+
 A live deployed version of the site can be found at https://phq-bookmarks.netlify.app/
 
 This project uses the latest stable version of Angular. The specific version is mentioned below.
