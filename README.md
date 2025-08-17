@@ -16,7 +16,9 @@ This project uses the latest stable version of Angular. The specific version is 
 6. A bookmark is also referred to as a link, or URL.
 7. Bookmarks must begin with either http:// or https://
 8. Since we are limited to front end technologies only it is not feasible to completely check if a link exists according to the project brief. This would likely require a third party service or backend technologies which we are not using because of the conditions of this project.
-9. LocalStorage is used as our "database" since we are limited to front end technologies we store our array of bookmarks as a local storage item. We could easily substitute this for any other local or backend form of storage.
+9. LocalStorage is used as our "database" since we are limited to front end technologies. We store our array of bookmarks as a local storage item. We could easily substitute this for any other local or backend form of storage. On page refresh the previously stored bookmarks are reloaded into the list of saved bookmarks within Angular.
+10. Prettier is used to maintain consistent code quality and formatting across different workstations and authors. Most IDE's support autoformat on save when used in conjunction with prettier. To manually run prettier I have created an npm script. Simply run `npm run pretty` in the root folder of this project using terminal. Make sure all node packages are installed using `npm install`.
+11. https://websitemockupgenerator.com/ was used to generate mockup images of our powerful app.
 
 ## Getting Started with this project
 
